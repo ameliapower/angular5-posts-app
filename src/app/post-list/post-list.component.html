@@ -1,7 +1,26 @@
-<ul>
+<!-- <ul>
 	<li *ngFor="let post of posts">
+		<p>User: {{post.userId}}</p>
 		<a routerLink="/posts/{{post.id}}">
 			{{post.id}} - {{post.title | uppercase}}
 		</a><br/><br/>
+		<button (click)="this.deletePost(post)">x</button>
 	</li>
 </ul>
+ -->
+
+<mat-list>
+ 	<mat-list-item *ngFor="let post of posts">
+		<p matLine>
+			<a routerLink="/posts/{{post.id}}">
+				<span>User: {{post.userId}}</span>
+				<span>
+				{{post.id}} - {{post.title | uppercase}}
+				</span>
+			</a>
+			<button mat-icon-button 
+				(click)="this.deletePost(post)">x
+			</button >
+		</p>
+	</mat-list-item>
+</mat-list>

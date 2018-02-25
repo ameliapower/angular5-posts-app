@@ -1,0 +1,19 @@
+<!-- #f will hold the value of the form-->
+<form name="new-post"  novalidate #value="ngForm" (ngSubmit)="addPost(value)"> 
+  <mat-form-field class="field-container">
+    <input matInput placeholder="Enter Title" type="text"
+    name="Enter Title" [ngModel]="title" >
+  </mat-form-field>
+
+  <mat-form-field class="field-container">
+    <input matInput placeholder="Enter User Id" 
+    name="Enter User Id" [ngModel]="userId" type="number">
+  </mat-form-field>
+
+  <mat-form-field class="field-container">
+    <textarea matInput placeholder="Body" type="text"
+    name="Enter Body Text" [ngModel]="body" ></textarea>
+  </mat-form-field>
+  <button type="submit">Add New</button>
+</form>
+

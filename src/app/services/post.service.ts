@@ -9,7 +9,7 @@ import { Post } from '../post';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({  "Content-type": "application/json; charset=UTF-8" })
 };
 
 
@@ -36,7 +36,38 @@ export class PostService {
 	 		catchError(this.handleError<Post>(`get post id=${id}`))
 	 	);
   }
- 
+
+  // delete(url: string, options?: RequestOptionsArgs): Observable<Response>
+  deletePost(post: Post | number):Observable<Post>{  // | number  A union type describes a value that can be one of several types.
+    // console.log(typeof post);
+    const id = typeof post === 'number' ? post : post.id;
+    const idUrl = `${this.apiUrl}/${id}`;
+    // console.log(idUrl);
+    return this.http.delete<Post>(idUrl, httpOptions).pipe(
+      tap(_ => console.log(`delete post id=${id}`)), // _ => explicitly states that one param is passed but ignored. You could use () => and not pass any params.
+      catchError(this.handleError<Post>('deletePost'))
+    );
+  }
+
+  
+  // put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>
+  updatePost(post: Post):Observable<any>{
+    const id = typeof post === 'number' ? post : post.id;
+    const idUrl = `${this.apiUrl}/${id}`;
+    return this.http.put(idUrl, JSON.stringify(post), httpOptions).pipe(
+      tap(_ => console.log(`updating post=${post.title}, id=${post.id}`)),
+      catchError(this.handleError<Post>(`updatePost id=${post.id}`))
+    );
+  }
+
+
+  // post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>
+  addPost(post: Post): Observable<Post>{
+    return this.http.post<Post>(this.apiUrl, post, httpOptions).pipe(
+      tap(_ => console.log(`adding post=${post}, title=${post.title}, id=${post.id}`)),
+      catchError(this.handleError<Post>(`addPost`))
+    );
+  }
 
 
 /**
@@ -49,7 +80,7 @@ private handleError<T> (operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {
 
     // TODO: send the error to remote logging infrastructure
-    console.error(error); // log to console instead
+    console.error("ERROR is:",  error); // log to console instead
 
     // TODO: better job of transforming error for user consumption
     // this.log(`${operation} failed: ${error.message}`);

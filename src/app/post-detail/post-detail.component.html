@@ -1,4 +1,9 @@
+<button (click)="goBack()">go back</button>
+
 <div>
-  <h3>{{title}}</h3>
-  <em>{{body}}</em>
+	<input type="text" [(ngModel)]="title" name="title">
+	<h3>{{title}}</h3>
+	<p><em>{{body}}</em></p>
+	<!-- <p>ID: {{id}}</p> -->
+	<button (click)="updatePost()">Edit</button>
 </div>

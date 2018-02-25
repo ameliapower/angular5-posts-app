@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatListModule } from '@angular/material/list';
 
 import { PostListComponent } from './post-list.component';
 import { PostService } from '../services/post.service';
@@ -12,7 +13,7 @@ describe('PostListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ PostListComponent ],
-      imports: [ RouterTestingModule, HttpClientTestingModule ], 
+      imports: [ RouterTestingModule, HttpClientTestingModule, MatListModule ], 
     })
     .compileComponents();
   }));

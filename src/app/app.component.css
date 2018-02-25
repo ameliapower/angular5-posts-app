@@ -1,0 +1,9 @@
+
+
+.mat-menu-item a{
+	color: #fff;
+	text-decoration: none;
+}
+.mat-menu-item a:hover{
+	color: cyan;
+}

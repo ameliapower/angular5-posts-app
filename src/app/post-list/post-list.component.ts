@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { Post } from '../post';
@@ -15,6 +15,8 @@ export class PostListComponent implements OnInit {
 	errorMessage: string = '';
 	posts : Post[];
 
+	// @Output() posts: Posts[]; 
+
 	constructor(private postService: PostService) { }
 
 	ngOnInit() {
@@ -26,6 +28,14 @@ export class PostListComponent implements OnInit {
 		.subscribe(posts => this.posts = posts,
 			error => this.errorMessage = <any>error)
 			// () => console.log(this.posts, `done`)
+	}
+
+
+	deletePost(post) {
+		this.posts = this.posts
+			.filter(p => p !== post); //return new array excluding the deleted id. Removed promptly from dom.
+		this.postService.deletePost(post)
+			.subscribe() //remove from data source
 	}
 
 }
